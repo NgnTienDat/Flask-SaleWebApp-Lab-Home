@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1 class="subject">WEB BAN HANG ONLINE</h1>
+    <ul>
+        <li><a href="{{ url_for('get_product_page') }}">Tất cả sản phẩm</a></li>
+
+        {% for c in categories%}
+            <li><a href="{{ url_for('get_product_page', category_id=c.id) }}">{{ c.name }}</a></li>
+        {% endfor%}
+    </ul>
+</body>
+</html>
