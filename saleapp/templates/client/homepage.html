@@ -1,0 +1,98 @@
+{% extends 'client/layout/base.html' %}
+
+{% block title %}CellphoneS{% endblock %}
+
+{% block content %}
+<!-- Navbar Start -->
+<div class="container-fluid mb-5">
+    <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+            <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
+               data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
+                <h6 class="m-0">Danh mục</h6>
+                <i class="fa fa-angle-down text-dark"></i>
+            </a>
+            <nav class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
+                 id="navbar-vertical">
+                <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+                    {% for c in categories %}
+
+                    <a class="nav-link" href="{{ url_for('get_product_page', category_id=c.id)}}">{{ c.name }}</a>
+
+                    {% endfor %}
+
+                </div>
+            </nav>
+        </div>
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                <a href="" class="text-decoration-none d-block d-lg-none">
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span
+                            class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </nav>
+            <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="height: 410px;">
+                        <img class="img-fluid" src="/static/images/home-ip16.png" alt="Image">
+
+                    </div>
+                    <div class="carousel-item" style="height: 410px;">
+                        <img class="img-fluid" src="/static/images/home-s24.png" alt="Image">
+
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                        <span class="carousel-control-prev-icon mb-n2"></span>
+                    </div>
+                </a>
+                <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                    <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                        <span class="carousel-control-next-icon mb-n2"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar End -->
+
+
+<!-- Products Start -->
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Sản phẩm nổi bật</span></h2>
+    </div>
+    <div class="row px-xl-5 pb-3">
+        {% for p in products %}
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+            <div class="card product-item border-0 mb-4">
+                <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                    <a href="{{ url_for('get_product_detail_page', product_id=p.id) }}">
+                        <img class="card-img-top" src="{{url_for('static', filename=p.image)}}" width="70"
+                             alt="{{p.name}}">
+                    </a>
+                </div>
+                <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                    <h6 class="text-truncate mb-3">{{ p.name }}</h6>
+                    <div class="d-flex justify-content-center">
+                        <h6>{{ "{:,.1f}".format(p.price)}}đ</h6>
+                        <h6 class="text-muted ml-2">
+                            <del>18.000.000đ</del>
+                        </h6>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Products End -->
+
+{% endblock %}
