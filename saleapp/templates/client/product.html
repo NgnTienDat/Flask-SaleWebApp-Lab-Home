@@ -169,6 +169,7 @@
                     </div>
                 </div>
                 {% if products %}
+
                 {% for p in products %}
                 <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                     <div class="card product-item border-0 mb-4">
@@ -191,30 +192,45 @@
                     </div>
                 </div>
                 {% endfor %}
+
+                <!--pagination-->
+
                 <div class="col-12 pb-1">
+
                     <nav aria-label="Page navigation">
+
                         <ul class="pagination justify-content-center mb-3">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" aria-label="Previous">
+                            <li class="page-item {% if page == 1 %}disabled{% endif %}">
+                                <a class="page-link" href="{{ url_for('get_product_page', page=page-1)}}"
+                                   aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
                                 </a>
                             </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
+                            {% for idx in range(1, pages+1) %}
+                            <li class="page-item {% if page == idx %}active{% endif %}">
+                                <a class="page-link" href="{{ url_for('get_product_page', page=idx)}}">{{idx}}</a>
+                            </li>
+                            {% endfor %}
+                            <li class="page-item {% if page == pages %}disabled{% endif %}">
+                                <a class="page-link" href="{{ url_for('get_product_page', page=page+1)}}"
+                                   aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
                                 </a>
                             </li>
                         </ul>
+
                     </nav>
+
                 </div>
+
+
                 {% else %}
                 <p>Không có sản phẩm!!!</p>
+
                 {% endif %}
+
             </div>
         </div>
         <!-- Shop Product End -->
@@ -223,7 +239,6 @@
 <!-- Shop End -->
 
 
-{% endblock %}
-
+{% endblock%}
 
 

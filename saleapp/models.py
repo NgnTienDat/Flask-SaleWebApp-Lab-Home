@@ -1,14 +1,34 @@
-from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey, Enum
 
 from saleapp import db
 from datetime import datetime
 from sqlalchemy.orm import relationship
 from saleapp import app
-
+from enum import Enum as UserEnum
 
 class BaseModel(db.Model):
     __abstract__ = True
     id = Column(Integer, primary_key=True, autoincrement=True)
+
+
+
+class UserRole(UserEnum):
+    ADMIN=1
+    USER=2
+
+class User(BaseModel):
+    name = Column(String(50), nullable=False)
+    username = Column(String(50), nullable=False, unique=True)     # USING PHONE NUMBER FOR USERNAME
+    password = Column(String(50), nullable=False)
+    avatar = Column(String(255))
+    email = Column(String(50))
+    active = Column(Boolean, default=True)
+    joined_date = Column(DateTime, default=datetime.now())
+    user_role = Column(Enum(UserRole), default=UserRole.USER)
+
+    def __str__(self):
+        return self.name
+
 
 
 class Category(BaseModel):
@@ -39,7 +59,7 @@ class Product(BaseModel):
 
 if __name__ == '__main__':
     with app.app_context():
-        # #     db.create_all()
+            db.create_all()
         # #     c1 = Category(name='Dien thoai')
         # #     c2 = Category(name='May tinh bang')
         # #     c3 = Category(name='Dong ho thong minh')
@@ -78,4 +98,4 @@ if __name__ == '__main__':
         #     pro = Product(name=p['name'], price=p['price'], image=p['image'],
         #                   description=p['description'], category_id=p['category_id'])
         #     db.session.add(pro)
-        db.session.commit()
+        # db.session.commit()

@@ -1,34 +1,52 @@
-<!--header-->
 <!-- Topbar Start -->
 <div class="container-fluid" style="background-color: #D70018;">
-
     <div class="row align-items-center py-3 px-xl-5">
-        <div class="col-lg-3 d-none d-lg-block">
+        <!-- Logo và Danh mục -->
+        <div class="col-lg-3 d-flex align-items-center">
             <a href="/" class="text-decoration-none">
                 <h3 class="m-0 display-5 font-weight-semi-bold" style="color: white;">cellPhoneS</h3>
             </a>
-
+            <div class="dropdown ml-3">
+                <a href="#" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" style="border-radius: 10px;">
+                    <i class="fas fa-bars" style="margin-right: 5px;"></i>Danh mục
+                </a>
+                <div class="dropdown-menu p-3" style="border-radius: 10px; min-width: 200px;">
+                    {% for c in categories%}
+                    <a class="dropdown-item d-flex align-items-center" href="{{ url_for('get_product_page', category_id=c.id)}}">
+                        <i class="fas fa-mobile-alt mr-2"></i> {{ c.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+<!--            <a href="#" class="btn btn-danger ml-3" style="margin-left: 10px; border-radius: 10px;">-->
+<!--                <i class="fas fa-bars" style="margin-right: 5px;"></i>Danh mục-->
+<!--            </a>-->
         </div>
 
+        <!-- Thanh tìm kiếm -->
         <div class="col-lg-6 col-6 text-left">
             <form method="get" action="/">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Cần cái gì????" name="kw">
+                    <input type="text" class="form-control" placeholder="Bạn cần tìm gì?" name="kw"
+                           style="border-radius: 10px 0 0 10px;">
                     <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"></i>
-                            </span>
+                        <span class="input-group-text bg-transparent text-primary" style="border-radius: 0 10px 10px 0;">
+                            <i class="fa fa-search"></i>
+                        </span>
                     </div>
                 </div>
             </form>
         </div>
+
+        <!-- Giỏ hàng và Đăng nhập -->
         <div class="col-lg-3 col-6 text-right">
-            <a href="" class="btn border">
+            <a href="#" class="btn border" style="border-radius: 10px;">
                 <i class="fas fa-shopping-cart text-primary"></i>
                 <span class="badge">0</span>
             </a>
-            <a href="" class="btn border">Login</a>
+            <a href="{{ url_for('get_login_page') }}" class="btn border" style="border-radius: 10px;">Login</a>
         </div>
     </div>
 </div>
 <!-- Topbar End -->
+

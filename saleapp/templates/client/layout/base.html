@@ -25,8 +25,96 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ url_for('static', filename='client/css/style.css') }}" rel="stylesheet">
+    <!-- Chỉ dành cho trang đăng nhập -->
 
+    {% if "login" in request.path %}
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .login-container .social-login img {
+            width: 30px;
+            margin-right: 10px;
+        }
+        .login-container .form-control {
+            margin-bottom: 15px;
+        }
+        .login-btn {
+            background-color: #d0011b;
+            color: white;
+        }
+        .login-container .forgot-link, .login-container .signup-link {
+            font-size: 0.9rem;
+        }
+        .login-container .signup-link a {
+            color: #d0011b;
+        }
+        .login-logo {
+            width: 100px;
+            height: 100px;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .divider::before {
+            margin-right: .25em;
+        }
+        .divider::after {
+            margin-left: .25em;
+        }
+    </style>
+    {% endif %}
 
+    {% if "register" in request.path %}
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .register-container {
+            max-width: 700px; /* Tăng chiều rộng của form */
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .divider::before {
+            margin-right: .25em;
+        }
+
+        .divider::after {
+            margin-left: .25em;
+        }
+        .social-login img {
+            width: 25px;
+            margin-right: 5px;
+        }
+    </style>
+    {% endif %}
 </head>
 
 <body>
@@ -41,9 +129,11 @@
 
 <!--footer-->
 
-{% block footer%}
-{% include 'client/layout/footer.html' %}
-{% endblock%}
+{% if "login" not in request.path and "register" not in request.path %}
+    {% block footer %}
+    {% include 'client/layout/footer.html' %}
+    {% endblock %}
+{% endif %}
 
 
 <!-- JavaScript Libraries -->

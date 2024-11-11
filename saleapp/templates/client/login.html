@@ -1,0 +1,30 @@
+
+{% extends 'client/layout/base.html' %}
+
+{% block title %}CellphoneS{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="login-container text-center">
+        <img src="{{ url_for('static', filename='images/cellPhoneS-logo.png') }}" class="login-logo mb-4">
+        <h4>Đăng nhập với</h4>
+        <div class="social-login d-flex justify-content-center mb-3">
+            <a href="#" class="btn">
+                <img src="https://static-account.cellphones.com.vn/_nuxt/img/image45.93ceca6.png" alt="Google"> Google
+            </a>
+            <a href="#" class="btn ml-2">
+                <img src="https://static-account.cellphones.com.vn/_nuxt/img/Logo-Zalo-Arc.a36365b.png" alt="Zalo"> Zalo
+            </a>
+        </div>
+       <div class="divider">hoặc</div>
+        <form>
+            <input type="text" class="form-control" placeholder="Nhập số điện thoại" required>
+            <input type="password" class="form-control" placeholder="Nhập mật khẩu" required>
+            <a href="#" class="forgot-link d-block text-right mb-3">Quên mật khẩu?</a>
+            <button type="submit" class="btn btn-block login-btn">Đăng nhập</button>
+        </form>
+        <p class="signup-link mt-3">Bạn chưa có tài khoản? <a href="{{ url_for('get_register_page')}}">Đăng ký ngay</a></p>
+    </div>
+</div>
+{% endblock %}
+
